@@ -22,41 +22,47 @@ function sqlForPartialUpdate(dataToUpdate, jsToSql) {
 }
 
 function constructWhereClause(searchFilter) {
-  const { name, minEmployees, maxEmployees } = searchFilter;
-
-  const keys = Object.keys(searchFilter);
   const query = [];
   const values = [];
   let results;
+  if (searchFilter) {
+    const keys = Object.keys(searchFilter);
+    const { name, minEmployees, maxEmployees } = searchFilter;
+    // const name = searchFilter?.name;
+    // const minEmployees = searchFilter?.minEmployees;
+    // const maxEmployees = searchFilter?.maxEmployees;
 
-  if (name !== undefined) {
-    values.push(name);
-    query.push(`name ILIKE $${keys.indexOf("name") + 1}`);
-  }
+    if (name !== undefined) {
+      values.push(name);
+      query.push(`name ILIKE $${keys.indexOf("name") + 1}`);
+    }
 
-  if (minEmployees !== undefined) {
-    values.push(minEmployees);
-    query.push(`num_employees >= $${keys.indexOf("minEmployees") + 1}`);
-  }
+    if (minEmployees !== undefined) {
+      values.push(minEmployees);
+      query.push(`num_employees >= $${keys.indexOf("minEmployees") + 1}`);
+    }
 
-  if (maxEmployees !== undefined) {
-    values.push(maxEmployees);
-    query.push(`num_employees <= $${keys.indexOf("maxEmployees") + 1}`);
-  }
+    if (maxEmployees !== undefined) {
+      values.push(maxEmployees);
+      query.push(`num_employees <= $${keys.indexOf("maxEmployees") + 1}`);
+    }
 
-  if (query) {
-    if (keys.length >= 1) {
-      results = `WHERE ${query.join(" AND ")}`;
-    } else {
-      results = `WHERE ${query.join(" ")}`;
+    if (query) {
+      if (keys.length >= 1) {
+        results = `WHERE ${query.join(" AND ")}`;
+      } else {
+        results = `WHERE ${query.join(" ")}`;
+      }
     }
   }
+
+  console.log("RESULTS: ", results)
+  console.log("VALUES: ", values)
 
   return {
     results,
     values,
   };
 }
-
 
 module.exports = { sqlForPartialUpdate, constructWhereClause };

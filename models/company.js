@@ -59,6 +59,7 @@ class Company {
     // todo: extract values and user coerse for null or Value extracted?
     const { whereClauses, values } = constructWhereClause(searchFilter);
     // WHERE name ILIKE ..., employeeNum > ...
+    console.log("WHERE CLAUSE: ", whereClauses);
 
     const companiesRes = await db.query(
       `SELECT handle,
@@ -68,7 +69,7 @@ class Company {
                 logo_url AS "logoUrl"
           FROM companies
           ${whereClauses}
-          ORDER BY name`, [...values]
+          ORDER BY name`, values
 
     );
 
