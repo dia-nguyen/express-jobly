@@ -54,16 +54,33 @@ class Company {
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
    * */
 
-  static async findAll() {
+
+  static async findAll(searchFilter) {
+
+    // const optional = "WHERE, minEmployees = $2, maxEmployees = $3"
+    // if (searchName) {
+    //   //put WHERE name = $1 into optional
+    // }
     const companiesRes = await db.query(
         `SELECT handle,
                 name,
                 description,
                 num_employees AS "numEmployees",
                 logo_url AS "logoUrl"
-           FROM companies
-           ORDER BY name`);
+          FROM companies
+          ${optional}
+          ORDER BY name`, [searchName, minEmployees, maxEmployees]);
     return companiesRes.rows;
+
+    // when user passes in nameLike, minEmployees, maxEmployees
+    // add WHERE clause to the query
+
+    // if nameLike company does not exist
+    // if min/max are invalid numbers
+    // should return company that has matching nameLike company
+    // should return company with min employees
+    // should return company with max employees
+    // should return all three
   }
 
   /** Given a company handle, return data about company.
