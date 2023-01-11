@@ -50,17 +50,7 @@ class Company {
    * */
 
   static async findAll(searchFilter) {
-
-    // const optional = "WHERE, minEmployees = $2, maxEmployees = $3"
-    // if (searchName) {
-    //   //put WHERE name = $1 into optional
-    // }
-
-    // todo: extract values and user coerse for null or Value extracted?
     const { whereClauses, values } = constructWhereClause(searchFilter);
-    // WHERE name ILIKE ..., employeeNum > ...
-    console.log("WHERE CLAUSE: ", whereClauses);
-
     const companiesRes = await db.query(
       `SELECT handle,
                 name,
@@ -69,21 +59,13 @@ class Company {
                 logo_url AS "logoUrl"
           FROM companies
           ${whereClauses}
-          ORDER BY name`, values
-
+          ORDER BY name`,
+      values
     );
 
+    console.log('COMPANIES RES',companiesRes);
+
     return companiesRes.rows;
-
-    // when user passes in nameLike, minEmployees, maxEmployees
-    // add WHERE clause to the query
-
-    // if nameLike company does not exist
-    // if min/max are invalid numbers
-    // should return company that has matching nameLike company
-    // should return company with min employees
-    // should return company with max employees
-    // should return all three
   }
 
   /** Given a company handle, return data about company.

@@ -21,16 +21,20 @@ function sqlForPartialUpdate(dataToUpdate, jsToSql) {
   };
 }
 
+/** Takes in optional search filter for name, minEmployees and maxEmployees
+ * Returns obj with sql where clause and list of values for each search query.
+ */
 function constructWhereClause(searchFilter) {
   const query = [];
   const values = [];
-  let results;
+  let whereClauses = "";
+
+  console.log("searchFilter", searchFilter);
+
   if (searchFilter) {
+    console.log("true", true);
     const keys = Object.keys(searchFilter);
     const { name, minEmployees, maxEmployees } = searchFilter;
-    // const name = searchFilter?.name;
-    // const minEmployees = searchFilter?.minEmployees;
-    // const maxEmployees = searchFilter?.maxEmployees;
 
     if (name !== undefined) {
       values.push(name);
@@ -49,18 +53,14 @@ function constructWhereClause(searchFilter) {
 
     if (query) {
       if (keys.length >= 1) {
-        results = `WHERE ${query.join(" AND ")}`;
-      } else {
-        results = `WHERE ${query.join(" ")}`;
+        whereClauses = `WHERE ${query.join(" AND ")}`;
+      } else if (keys.length > 0) {
+        whereClauses = `WHERE ${query.join(" ")}`;
       }
     }
   }
-
-  console.log("RESULTS: ", results)
-  console.log("VALUES: ", values)
-
   return {
-    results,
+    whereClauses,
     values,
   };
 }

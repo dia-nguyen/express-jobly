@@ -31,9 +31,10 @@ describe("create", function () {
     expect(company).toEqual(newCompany);
 
     const result = await db.query(
-          `SELECT handle, name, description, num_employees, logo_url
+      `SELECT handle, name, description, num_employees, logo_url
            FROM companies
-           WHERE handle = 'new'`);
+           WHERE handle = 'new'`
+    );
     expect(result.rows).toEqual([
       {
         handle: "new",
@@ -86,13 +87,12 @@ describe("findAll", function () {
     ]);
   });
 
-  test("works: with filter", async function () {
+  test("works: with name search filter", async function () {
     const searchFilter = {
-      name: "c1"
-    }
+      name: "c1",
+    };
 
     let companies = await Company.findAll(searchFilter);
-    console.log('companies',companies);
     expect(companies).toEqual([
       {
         handle: "c1",
@@ -100,9 +100,51 @@ describe("findAll", function () {
         description: "Desc1",
         numEmployees: 1,
         logoUrl: "http://c1.img",
+      },
+    ]);
+  });
+
+  test("works: with minEmployee number", async function () {
+    const searchFilter = {
+      minEmployees: 3,
+    };
+
+    let companies = await Company.findAll(searchFilter);
+    expect(companies).toEqual([
+      {
+        description: "Desc3",
+        handle: "c3",
+        logoUrl: "http://c3.img",
+        name: "C3",
+        numEmployees: 3,
+      },
+    ]);
+  });
+
+  test.only("works: with maxEmployee number", async function () {
+    const searchFilter = {
+      minEmployees: 2,
+    };
+
+    let companies = await Company.findAll(searchFilter);
+    expect(companies).toEqual([
+      {
+        description: "Desc2",
+        handle: "c2",
+        logoUrl: "http://c2.img",
+        name: "C2",
+        numEmployees: 2,
+      },
+      {
+        description: "Desc3",
+        handle: "c3",
+        logoUrl: "http://c3.img",
+        name: "C3",
+        numEmployees: 3,
       }
     ]);
   });
+
 });
 
 /************************************** get */
@@ -147,16 +189,19 @@ describe("update", function () {
     });
 
     const result = await db.query(
-          `SELECT handle, name, description, num_employees, logo_url
+      `SELECT handle, name, description, num_employees, logo_url
            FROM companies
-           WHERE handle = 'c1'`);
-    expect(result.rows).toEqual([{
-      handle: "c1",
-      name: "New",
-      description: "New Description",
-      num_employees: 10,
-      logo_url: "http://new.img",
-    }]);
+           WHERE handle = 'c1'`
+    );
+    expect(result.rows).toEqual([
+      {
+        handle: "c1",
+        name: "New",
+        description: "New Description",
+        num_employees: 10,
+        logo_url: "http://new.img",
+      },
+    ]);
   });
 
   test("works: null fields", async function () {
@@ -174,16 +219,19 @@ describe("update", function () {
     });
 
     const result = await db.query(
-          `SELECT handle, name, description, num_employees, logo_url
+      `SELECT handle, name, description, num_employees, logo_url
            FROM companies
-           WHERE handle = 'c1'`);
-    expect(result.rows).toEqual([{
-      handle: "c1",
-      name: "New",
-      description: "New Description",
-      num_employees: null,
-      logo_url: null,
-    }]);
+           WHERE handle = 'c1'`
+    );
+    expect(result.rows).toEqual([
+      {
+        handle: "c1",
+        name: "New",
+        description: "New Description",
+        num_employees: null,
+        logo_url: null,
+      },
+    ]);
   });
 
   test("not found if no such company", async function () {
@@ -211,7 +259,8 @@ describe("remove", function () {
   test("works", async function () {
     await Company.remove("c1");
     const res = await db.query(
-        "SELECT handle FROM companies WHERE handle='c1'");
+      "SELECT handle FROM companies WHERE handle='c1'"
+    );
     expect(res.rows.length).toEqual(0);
   });
 
