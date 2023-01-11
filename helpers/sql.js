@@ -11,8 +11,8 @@ function sqlForPartialUpdate(dataToUpdate, jsToSql) {
   if (keys.length === 0) throw new BadRequestError("No data");
 
   // {firstName: 'Aliya', age: 32} => ['"first_name"=$1', '"age"=$2']
-  const cols = keys.map((colName, idx) =>
-      `"${jsToSql[colName] || colName}"=$${idx + 1}`,
+  const cols = keys.map(
+    (colName, idx) => `"${jsToSql[colName] || colName}"=$${idx + 1}`
   );
 
   return {
@@ -21,4 +21,42 @@ function sqlForPartialUpdate(dataToUpdate, jsToSql) {
   };
 }
 
-module.exports = { sqlForPartialUpdate };
+function constructWhereClause(searchFilter) {
+  const { name, minEmployees, maxEmployees } = searchFilter;
+
+  const keys = Object.keys(searchFilter);
+  const query = [];
+  const values = [];
+  let results;
+
+  if (name !== undefined) {
+    values.push(name);
+    query.push(`name ILIKE $${keys.indexOf("name") + 1}`);
+  }
+
+  if (minEmployees !== undefined) {
+    values.push(minEmployees);
+    query.push(`num_employees >= $${keys.indexOf("minEmployees") + 1}`);
+  }
+
+  if (maxEmployees !== undefined) {
+    values.push(maxEmployees);
+    query.push(`num_employees <= $${keys.indexOf("maxEmployees") + 1}`);
+  }
+
+  if (query) {
+    if (keys.length >= 1) {
+      results = `WHERE ${query.join(" AND ")}`;
+    } else {
+      results = `WHERE ${query.join(" ")}`;
+    }
+  }
+
+  return {
+    results,
+    values,
+  };
+}
+
+
+module.exports = { sqlForPartialUpdate, constructWhereClause };

@@ -88,10 +88,11 @@ describe("findAll", function () {
 
   test("works: with filter", async function () {
     const searchFilter = {
-      searchName: "c1"
+      name: "c1"
     }
 
     let companies = await Company.findAll(searchFilter);
+    console.log('companies',companies);
     expect(companies).toEqual([
       {
         handle: "c1",
