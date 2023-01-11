@@ -48,9 +48,9 @@ class Company {
    *
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
    * */
-
+  // Part 2
   static async findAll(searchFilter) {
-    const { whereClauses, values } = constructWhereClause(searchFilter);
+    const { whereClause, values } = constructWhereClause(searchFilter);
     const companiesRes = await db.query(
       `SELECT handle,
                 name,
@@ -58,7 +58,7 @@ class Company {
                 num_employees AS "numEmployees",
                 logo_url AS "logoUrl"
           FROM companies
-          ${whereClauses}
+          ${whereClause}
           ORDER BY name`,
       values
     );

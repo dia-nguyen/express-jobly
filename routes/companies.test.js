@@ -106,13 +106,13 @@ describe("GET /companies", function () {
     expect(resp.statusCode).toEqual(500);
   });
 
+  // Part 2
   test("tests searching by name works", async function () {
     const search = {
       name: "c1",
     };
-    const resp = await request(app).get("/companies").query({search});
+    const resp = await request(app).get("/companies").query(search);
 
-    console.log('resp.body',resp.body);
     expect(resp.statusCode).toEqual(200);
     expect(resp.body).toEqual({
       companies: [
@@ -126,7 +126,34 @@ describe("GET /companies", function () {
       ],
     });
   });
-});
+
+
+  test("tests searching by minEmployees works", async function () {
+    const search = {
+      minEmployees: 2,
+    };
+    const resp = await request(app).get("/companies").query(search);
+
+    expect(resp.statusCode).toEqual(200);
+    expect(resp.body).toEqual({
+      companies: [
+        {
+          description: "Desc2",
+           handle: "c2",
+           logoUrl: "http://c2.img",
+           name: "C2",
+           numEmployees: 2,
+        },
+        {
+          description: "Desc3",
+           handle: "c3",
+           logoUrl: "http://c3.img",
+           name: "C3",
+           numEmployees: 3,
+        }
+      ],
+    });
+  });});
 
 /************************************** GET /companies/:handle */
 

@@ -27,12 +27,11 @@ function sqlForPartialUpdate(dataToUpdate, jsToSql) {
 function constructWhereClause(searchFilter) {
   const query = [];
   const values = [];
-  let whereClauses = "";
+  let whereClause = "";
 
-  console.log("searchFilter", searchFilter);
 
   if (searchFilter) {
-    console.log("true", true);
+
     const keys = Object.keys(searchFilter);
     const { name, minEmployees, maxEmployees } = searchFilter;
 
@@ -53,14 +52,14 @@ function constructWhereClause(searchFilter) {
 
     if (query) {
       if (keys.length >= 1) {
-        whereClauses = `WHERE ${query.join(" AND ")}`;
+        whereClause = `WHERE ${query.join(" AND ")}`;
       } else if (keys.length > 0) {
-        whereClauses = `WHERE ${query.join(" ")}`;
+        whereClause = `WHERE ${query.join(" ")}`;
       }
     }
   }
   return {
-    whereClauses,
+    whereClause,
     values,
   };
 }

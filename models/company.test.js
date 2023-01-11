@@ -121,7 +121,7 @@ describe("findAll", function () {
     ]);
   });
 
-  test.only("works: with maxEmployee number", async function () {
+  test("works: with maxEmployee number", async function () {
     const searchFilter = {
       minEmployees: 2,
     };
