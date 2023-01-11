@@ -56,11 +56,14 @@ class Company {
 
 
   static async findAll(searchFilter) {
+    const { name, minEmployees, maxEmployees } = searchFilter;
 
     // const optional = "WHERE, minEmployees = $2, maxEmployees = $3"
     // if (searchName) {
     //   //put WHERE name = $1 into optional
     // }
+
+    // todo: extract values and user coerse for null or Value extracted?
     const companiesRes = await db.query(
         `SELECT handle,
                 name,
@@ -68,8 +71,10 @@ class Company {
                 num_employees AS "numEmployees",
                 logo_url AS "logoUrl"
           FROM companies
-          ${optional}
-          ORDER BY name`, [searchName, minEmployees, maxEmployees]);
+          WHERE (name ILIKE $1 AND name IS NULL)
+            OR (num_employees >= $2 AND num_employees IS NULL)
+            OR (num_employees <= $3 AND num_employees IS NULL)
+          ORDER BY name`,[name, minEmployees, maxEmployees]);
     return companiesRes.rows;
 
     // when user passes in nameLike, minEmployees, maxEmployees
