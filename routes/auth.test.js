@@ -113,22 +113,3 @@ describe("POST /auth/register", function () {
   });
 });
 
-
-// TODO: create company as admin
-
-
-// TODO: create account in db and ping insomnia
-
-// TODO: might need try to create company as not -logged in
-
-// TODO: update company as admin
-
-// TODO: try to update company as non-admin
-
-// TODO: might need try to update company as not -logged in
-
-// TODO: delete company as admin
-
-// TODO: try to delete company as non-admin
-
-// TODO: might need try to delete company as not -logged in
