@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1673561443297" clover="3.2.0">
-  <project timestamp="1673561443297" name="All files">
+<coverage generated="1673564585270" clover="3.2.0">
+  <project timestamp="1673564585270" name="All files">
     <metrics statements="302" coveredstatements="301" conditionals="88" coveredconditionals="86" methods="54" coveredmethods="53" elements="444" coveredelements="440" complexity="0" loc="302" ncloc="302" packages="5" files="14" classes="14"/>
     <package name="express-jobly">
       <metrics statements="50" coveredstatements="49" conditionals="18" coveredconditionals="16" methods="8" coveredmethods="7"/>
-      <file name="app.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/app.js">
+      <file name="app.js" path="/Users/elixir/rithm/exercises/express-jobly/app.js">
         <metrics statements="24" coveredstatements="24" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="5" count="4" type="stmt"/>
         <line num="6" count="4" type="stmt"/>
@@ -31,7 +31,7 @@
         <line num="40" count="41" type="stmt"/>
         <line num="45" count="4" type="stmt"/>
       </file>
-      <file name="config.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/config.js">
+      <file name="config.js" path="/Users/elixir/rithm/exercises/express-jobly/config.js">
         <metrics statements="13" coveredstatements="13" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
         <line num="6" count="9" type="stmt"/>
@@ -47,7 +47,7 @@
         <line num="29" count="9" type="stmt"/>
         <line num="31" count="9" type="stmt"/>
       </file>
-      <file name="db.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/db.js">
+      <file name="db.js" path="/Users/elixir/rithm/exercises/express-jobly/db.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="5" count="6" type="stmt"/>
         <line num="6" count="6" type="stmt"/>
@@ -55,13 +55,13 @@
         <line num="12" count="6" type="stmt"/>
         <line num="14" count="6" type="stmt"/>
       </file>
-      <file name="expressError.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/expressError.js">
+      <file name="expressError.js" path="/Users/elixir/rithm/exercises/express-jobly/expressError.js">
         <metrics statements="8" coveredstatements="7" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="4"/>
-        <line num="9" count="54" type="stmt"/>
-        <line num="10" count="54" type="stmt"/>
-        <line num="11" count="54" type="stmt"/>
+        <line num="9" count="55" type="stmt"/>
+        <line num="10" count="55" type="stmt"/>
+        <line num="11" count="55" type="stmt"/>
         <line num="19" count="14" type="stmt"/>
-        <line num="27" count="21" type="stmt"/>
+        <line num="27" count="22" type="stmt"/>
         <line num="35" count="19" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="47" count="8" type="stmt"/>
@@ -69,7 +69,7 @@
     </package>
     <package name="express-jobly.helpers">
       <metrics statements="13" coveredstatements="13" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
-      <file name="sql.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/helpers/sql.js">
+      <file name="sql.js" path="/Users/elixir/rithm/exercises/express-jobly/helpers/sql.js">
         <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="1" count="7" type="stmt"/>
         <line num="18" count="16" type="stmt"/>
@@ -79,7 +79,7 @@
         <line num="26" count="13" type="stmt"/>
         <line num="33" count="7" type="stmt"/>
       </file>
-      <file name="tokens.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/helpers/tokens.js">
+      <file name="tokens.js" path="/Users/elixir/rithm/exercises/express-jobly/helpers/tokens.js">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="5" type="stmt"/>
         <line num="2" count="5" type="stmt"/>
@@ -91,33 +91,33 @@
     </package>
     <package name="express-jobly.middleware">
       <metrics statements="20" coveredstatements="20" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
-      <file name="auth.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/middleware/auth.js">
+      <file name="auth.js" path="/Users/elixir/rithm/exercises/express-jobly/middleware/auth.js">
         <metrics statements="20" coveredstatements="20" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
         <line num="5" count="5" type="stmt"/>
         <line num="6" count="5" type="stmt"/>
         <line num="7" count="5" type="stmt"/>
-        <line num="19" count="65" type="stmt"/>
+        <line num="18" count="65" type="stmt"/>
+        <line num="19" count="65" type="cond" truecount="2" falsecount="0"/>
         <line num="20" count="65" type="cond" truecount="2" falsecount="0"/>
-        <line num="21" count="65" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="37" type="stmt"/>
         <line num="22" count="37" type="stmt"/>
-        <line num="23" count="37" type="stmt"/>
-        <line num="25" count="64" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="37" count="43" type="cond" truecount="2" falsecount="0"/>
+        <line num="24" count="64" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="36" count="43" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="35" type="stmt"/>
         <line num="38" count="35" type="stmt"/>
-        <line num="39" count="35" type="stmt"/>
-        <line num="46" count="23" type="cond" truecount="2" falsecount="0"/>
-        <line num="47" count="16" type="stmt"/>
-        <line num="54" count="14" type="stmt"/>
-        <line num="56" count="14" type="cond" truecount="4" falsecount="0"/>
-        <line num="57" count="3" type="stmt"/>
-        <line num="59" count="11" type="stmt"/>
-        <line num="62" count="5" type="stmt"/>
+        <line num="45" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="46" count="16" type="stmt"/>
+        <line num="53" count="17" type="stmt"/>
+        <line num="55" count="17" type="cond" truecount="4" falsecount="0"/>
+        <line num="56" count="4" type="stmt"/>
+        <line num="58" count="13" type="stmt"/>
+        <line num="61" count="5" type="stmt"/>
       </file>
     </package>
     <package name="express-jobly.models">
       <metrics statements="98" coveredstatements="98" conditionals="34" coveredconditionals="34" methods="16" coveredmethods="16"/>
-      <file name="_testCommon.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/models/_testCommon.js">
+      <file name="_testCommon.js" path="/Users/elixir/rithm/exercises/express-jobly/models/_testCommon.js">
         <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -131,7 +131,7 @@
         <line num="42" count="2" type="stmt"/>
         <line num="46" count="2" type="stmt"/>
       </file>
-      <file name="company.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/models/company.js">
+      <file name="company.js" path="/Users/elixir/rithm/exercises/express-jobly/models/company.js">
         <metrics statements="47" coveredstatements="47" conditionals="20" coveredconditionals="20" methods="6" coveredmethods="6"/>
         <line num="3" count="5" type="stmt"/>
         <line num="4" count="5" type="stmt"/>
@@ -181,7 +181,7 @@
         <line num="188" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="192" count="5" type="stmt"/>
       </file>
-      <file name="user.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/models/user.js">
+      <file name="user.js" path="/Users/elixir/rithm/exercises/express-jobly/models/user.js">
         <metrics statements="40" coveredstatements="40" conditionals="14" coveredconditionals="14" methods="6" coveredmethods="6"/>
         <line num="3" count="5" type="stmt"/>
         <line num="4" count="5" type="stmt"/>
@@ -227,7 +227,7 @@
     </package>
     <package name="express-jobly.routes">
       <metrics statements="121" coveredstatements="121" conditionals="18" coveredconditionals="18" methods="23" coveredmethods="23"/>
-      <file name="_testCommon.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/routes/_testCommon.js">
+      <file name="_testCommon.js" path="/Users/elixir/rithm/exercises/express-jobly/routes/_testCommon.js">
         <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="3" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
@@ -249,7 +249,7 @@
         <line num="87" count="3" type="stmt"/>
         <line num="90" count="3" type="stmt"/>
       </file>
-      <file name="auth.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/routes/auth.js">
+      <file name="auth.js" path="/Users/elixir/rithm/exercises/express-jobly/routes/auth.js">
         <metrics statements="26" coveredstatements="26" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="5" count="4" type="stmt"/>
         <line num="7" count="4" type="stmt"/>
@@ -278,7 +278,7 @@
         <line num="62" count="1" type="stmt"/>
         <line num="66" count="4" type="stmt"/>
       </file>
-      <file name="companies.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/routes/companies.js">
+      <file name="companies.js" path="/Users/elixir/rithm/exercises/express-jobly/routes/companies.js">
         <metrics statements="42" coveredstatements="42" conditionals="10" coveredconditionals="10" methods="8" coveredmethods="8"/>
         <line num="5" count="4" type="stmt"/>
         <line num="6" count="4" type="stmt"/>
@@ -323,7 +323,7 @@
         <line num="124" count="1" type="stmt"/>
         <line num="128" count="4" type="stmt"/>
       </file>
-      <file name="users.js" path="/Users/chrismaltez/Rithm/exercises_lectures/20230111/Excercises/express-jobly/routes/users.js">
+      <file name="users.js" path="/Users/elixir/rithm/exercises/express-jobly/routes/users.js">
         <metrics statements="34" coveredstatements="34" conditionals="4" coveredconditionals="4" methods="7" coveredmethods="7"/>
         <line num="5" count="4" type="stmt"/>
         <line num="7" count="4" type="stmt"/>
