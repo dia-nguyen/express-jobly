@@ -193,7 +193,7 @@ describe("GET /users", function () {
 
 describe("GET /users/:username", function () {
 
-  test.only("works for admin", async function () {
+  test("works for admin", async function () {
     const resp = await request(app)
       .get(`/users/u1`)
       .set("authorization", `Bearer ${adminToken}`);
@@ -214,10 +214,10 @@ describe("GET /users/:username", function () {
       .set("authorization", `Bearer ${u1Token}`);
     expect(resp.body).toEqual({
       user: {
-        username: "u2",
-        firstName: "U2F",
-        lastName: "U2L",
-        email: "user2@user.com",
+        username: "u1",
+        firstName: "U1F",
+        lastName: "U1L",
+        email: "user1@user.com",
         isAdmin: false,
       },
     });
