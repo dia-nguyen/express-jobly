@@ -77,12 +77,10 @@ class Company {
         query.push(`num_employees <= $${values.length}`);
       }
 
-      if (query) {
-        if (keys.length >= 1) {
-          whereClause = `WHERE ${query.join(" AND ")}`;
-        } else if (keys.length > 0) {
-          whereClause = `WHERE ${query.join(" ")}`;
-        }
+      if (keys.length > 1) {
+        whereClause = `WHERE ${query.join(" AND ")}`;
+      } else if (keys.length > 0) {
+        whereClause = `WHERE ${query[0]}`;
       }
     }
     return {

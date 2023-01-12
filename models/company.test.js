@@ -145,6 +145,23 @@ describe("findAll", function () {
     ]);
   });
 
+  test("works: with name and minEmployees search filter", async function () {
+    const searchFilter = {
+      name: "c1",
+      minEmployees: 1,
+    };
+
+    let companies = await Company.findAll(searchFilter);
+    expect(companies).toEqual([
+      {
+        handle: "c1",
+        name: "C1",
+        description: "Desc1",
+        numEmployees: 1,
+        logoUrl: "http://c1.img",
+      },
+    ]);
+  });
 });
 
 /************************************** get */
