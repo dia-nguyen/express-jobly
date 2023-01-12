@@ -107,7 +107,7 @@ class Company {
       values
     );
 
-    //FIXME:syntax error at or near \"ORDER\""
+
     return companiesRes.rows;
   }
 
