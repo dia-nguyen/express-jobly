@@ -10,6 +10,7 @@ const { ensureLoggedIn, isAdmin } = require("../middleware/auth");
 const Company = require("../models/company");
 
 const companyNewSchema = require("../schemas/companyNew.json");
+const companyFilterSchema = require("../schemas/companyFilter.json");
 const companyUpdateSchema = require("../schemas/companyUpdate.json");
 
 const router = new express.Router();
@@ -24,7 +25,7 @@ const router = new express.Router();
  * Authorization required: login
  */
 
-router.post("/", ensureLoggedIn, isAdmin, async function (req, res, next) {
+router.post("/", ensureLoggedIn, async function (req, res, next) {
   const validator = jsonschema.validate(
     req.body,
     companyNewSchema,
@@ -51,6 +52,27 @@ router.post("/", ensureLoggedIn, isAdmin, async function (req, res, next) {
  */
 
 router.get("/", async function (req, res, next) {
+  const query = req.query;
+
+  if (query.minEmployees) {
+    query.minEmployees = Number(query.minEmployees)
+  }
+  if (query.maxEmployees) {
+    query.maxEmployees = Number(query.maxEmployees)
+  }
+
+  if (req.query !== undefined) {
+    const validator = jsonschema.validate(
+      query,
+      companyFilterSchema,
+      {required: true}
+    )
+    if (!validator.valid) {
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
+  }
+
   const companies = await Company.findAll(req.query);
   return res.json({ companies });
 });

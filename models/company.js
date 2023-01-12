@@ -2,7 +2,7 @@
 
 const db = require("../db");
 const { BadRequestError, NotFoundError } = require("../expressError");
-const { sqlForPartialUpdate, constructWhereClause } = require("../helpers/sql");
+const { sqlForPartialUpdate } = require("../helpers/sql");
 
 /** Related functions for companies. */
 
@@ -44,13 +44,59 @@ class Company {
     return company;
   }
 
+  /*
+   * Constructs a WHERE clause and parameterized query
+   * for filtering company by name, min or max employees
+   *
+   * searchFilter should be { name, minEmployees, maxEmployees }
+   *
+   * Returns { whereClause: "WHERE name ILIKE $1", values: ["apple"]}
+   */
+
+  static constructWhereClause(searchFilter) {
+    const query = [];
+    const values = [];
+    let whereClause = "";
+
+    if (searchFilter) {
+      const keys = Object.keys(searchFilter);
+      const { name, minEmployees, maxEmployees } = searchFilter;
+
+      if (name !== undefined) {
+        values.push(name);
+        query.push(`name ILIKE $${values.length}`);
+      }
+
+      if (minEmployees !== undefined) {
+        values.push(minEmployees);
+        query.push(`num_employees >= $${values.length}`);
+      }
+
+      if (maxEmployees !== undefined) {
+        values.push(maxEmployees);
+        query.push(`num_employees <= $${values.length}`);
+      }
+
+      if (query) {
+        if (keys.length >= 1) {
+          whereClause = `WHERE ${query.join(" AND ")}`;
+        } else if (keys.length > 0) {
+          whereClause = `WHERE ${query.join(" ")}`;
+        }
+      }
+    }
+    return {
+      whereClause,
+      values,
+    };
+  }
   /** Find all companies.
    *
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
    * */
   // Part 2
   static async findAll(searchFilter) {
-    const { whereClause, values } = constructWhereClause(searchFilter);
+    const { whereClause, values } = this.constructWhereClause(searchFilter);
     const companiesRes = await db.query(
       `SELECT handle,
                 name,
@@ -63,8 +109,7 @@ class Company {
       values
     );
 
-    console.log('COMPANIES RES',companiesRes);
-
+    //FIXME:syntax error at or near \"ORDER\""
     return companiesRes.rows;
   }
 

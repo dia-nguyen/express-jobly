@@ -127,7 +127,6 @@ describe("GET /companies", function () {
     });
   });
 
-
   test("tests searching by minEmployees works", async function () {
     const search = {
       minEmployees: 2,
@@ -139,21 +138,100 @@ describe("GET /companies", function () {
       companies: [
         {
           description: "Desc2",
-           handle: "c2",
-           logoUrl: "http://c2.img",
-           name: "C2",
-           numEmployees: 2,
+          handle: "c2",
+          logoUrl: "http://c2.img",
+          name: "C2",
+          numEmployees: 2,
         },
         {
           description: "Desc3",
-           handle: "c3",
-           logoUrl: "http://c3.img",
-           name: "C3",
-           numEmployees: 3,
+          handle: "c3",
+          logoUrl: "http://c3.img",
+          name: "C3",
+          numEmployees: 3,
+        },
+      ],
+    });
+  });
+
+  test("tests searching by maxEmployees works", async function () {
+    const search = {
+      maxEmployees: 2,
+    };
+    const resp = await request(app).get("/companies").query(search);
+
+    expect(resp.statusCode).toEqual(200);
+    expect(resp.body).toEqual({
+      companies: [
+        {
+          description: "Desc1",
+          handle: "c1",
+          logoUrl: "http://c1.img",
+          name: "C1",
+          numEmployees: 1,
+        },
+        {
+          description: "Desc2",
+          handle: "c2",
+          logoUrl: "http://c2.img",
+          name: "C2",
+          numEmployees: 2,
         }
       ],
     });
-  });});
+  });
+
+  test("throws bad request if invalid name filter", async function () {
+    const search = {
+      name: ""
+    };
+    const resp = await request(app).get("/companies").query(search);
+
+    expect(resp.statusCode).toEqual(400);
+    expect(resp.body).toEqual({
+      "error": {
+        "message": [
+          "instance.name does not meet minimum length of 1"
+        ],
+        "status": 400
+      }
+    });
+  });
+
+  test("throws bad request if invalid minEmployees", async function () {
+    const search = {
+      minEmployees: "orange"
+    };
+    const resp = await request(app).get("/companies").query(search);
+
+    expect(resp.statusCode).toEqual(400);
+    expect(resp.body).toEqual({
+      "error": {
+        "message": [
+          "instance.minEmployees is not of a type(s) integer"
+        ],
+        "status": 400
+      }
+    });
+  });
+
+  test("throws bad request if invalid maxEmployees", async function () {
+    const search = {
+      maxEmployees: "orange"
+    };
+    const resp = await request(app).get("/companies").query(search);
+
+    expect(resp.statusCode).toEqual(400);
+    expect(resp.body).toEqual({
+      "error": {
+        "message": [
+          "instance.maxEmployees is not of a type(s) integer"
+        ],
+        "status": 400
+      }
+    });
+  });
+});
 
 /************************************** GET /companies/:handle */
 
