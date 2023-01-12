@@ -68,6 +68,12 @@ async function commonBeforeAll() {
     password: "password",
     isAdmin: true,
   });
+  // await Job.create({
+  //   title: "engineer",
+  //   companyHandle: "c1",
+  //   salary: "50000",
+  //   equity: 0
+  // });
 }
 
 async function commonBeforeEach() {
@@ -81,7 +87,6 @@ async function commonAfterEach() {
 async function commonAfterAll() {
   await db.end();
 }
-
 
 const u1Token = createToken({ username: "u1", isAdmin: false });
 const adminToken = createToken({ username: "admin", isAdmin: true });

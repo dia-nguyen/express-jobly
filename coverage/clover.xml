@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1673564585270" clover="3.2.0">
-  <project timestamp="1673564585270" name="All files">
-    <metrics statements="302" coveredstatements="301" conditionals="88" coveredconditionals="86" methods="54" coveredmethods="53" elements="444" coveredelements="440" complexity="0" loc="302" ncloc="302" packages="5" files="14" classes="14"/>
+<coverage generated="1673565371990" clover="3.2.0">
+  <project timestamp="1673565371990" name="All files">
+    <metrics statements="301" coveredstatements="300" conditionals="88" coveredconditionals="86" methods="54" coveredmethods="53" elements="443" coveredelements="439" complexity="0" loc="301" ncloc="301" packages="5" files="14" classes="14"/>
     <package name="express-jobly">
       <metrics statements="50" coveredstatements="49" conditionals="18" coveredconditionals="16" methods="8" coveredmethods="7"/>
       <file name="app.js" path="/Users/elixir/rithm/exercises/express-jobly/app.js">
@@ -90,9 +90,9 @@
       </file>
     </package>
     <package name="express-jobly.middleware">
-      <metrics statements="20" coveredstatements="20" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
+      <metrics statements="19" coveredstatements="19" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
       <file name="auth.js" path="/Users/elixir/rithm/exercises/express-jobly/middleware/auth.js">
-        <metrics statements="20" coveredstatements="20" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
+        <metrics statements="19" coveredstatements="19" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
         <line num="5" count="5" type="stmt"/>
         <line num="6" count="5" type="stmt"/>
         <line num="7" count="5" type="stmt"/>
@@ -105,14 +105,13 @@
         <line num="26" count="1" type="stmt"/>
         <line num="36" count="43" type="cond" truecount="2" falsecount="0"/>
         <line num="37" count="35" type="stmt"/>
-        <line num="38" count="35" type="stmt"/>
-        <line num="45" count="23" type="cond" truecount="2" falsecount="0"/>
-        <line num="46" count="16" type="stmt"/>
-        <line num="53" count="17" type="stmt"/>
-        <line num="55" count="17" type="cond" truecount="4" falsecount="0"/>
-        <line num="56" count="4" type="stmt"/>
-        <line num="58" count="13" type="stmt"/>
-        <line num="61" count="5" type="stmt"/>
+        <line num="44" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="16" type="stmt"/>
+        <line num="52" count="17" type="stmt"/>
+        <line num="54" count="17" type="cond" truecount="4" falsecount="0"/>
+        <line num="55" count="4" type="stmt"/>
+        <line num="57" count="13" type="stmt"/>
+        <line num="60" count="5" type="stmt"/>
       </file>
     </package>
     <package name="express-jobly.models">
