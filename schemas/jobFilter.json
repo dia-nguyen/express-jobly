@@ -12,14 +12,9 @@
       "type": "integer",
       "minimum": 0
     },
-    "equity": {
-      "type": "string"
+    "hasEquity": {
+      "type": "boolean"
     }
   },
-  "additionalProperties": false,
-  "required": [
-    "title",
-    "companyHandle",
-    "salary"
-  ]
+  "additionalProperties": false
 }

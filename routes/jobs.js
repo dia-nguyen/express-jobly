@@ -10,6 +10,8 @@ const { ensureLoggedIn, ensureIsAdmin } = require("../middleware/auth");
 const Job = require("../models/job");
 
 const jobNewSchema = require("../schemas/jobNew.json");
+const jobFilterSchema = require("../schemas/jobFilter.json");
+const jobUpdateSchema = require("../schemas/jobUpdate.json");
 
 const router = new express.Router();
 
@@ -51,9 +53,15 @@ router.post("/",ensureLoggedIn, ensureIsAdmin, async function () {
 router.get("/", async function (req, res, next) {
   const query = req.query;
 
-  if(query.salary) {
+  if(query.minSalary) {
     query.minSalary = Number(query.minSalary)
   }
+
+
+  if(query.hasEquity === "true") {
+    query.hasEquity = true
+  }
+
 
   const validator = jsonschema.validate(
     query,
@@ -65,7 +73,7 @@ router.get("/", async function (req, res, next) {
     throw new BadRequestError(errs);
   }
 
-  const jobs = await Job.findAll(req.query);
+  const jobs = await Job.findAll(query);
   return res.json({ jobs });
 })
 
@@ -114,3 +122,5 @@ router.delete("/:id", ensureLoggedIn, ensureIsAdmin, async function (req, res, n
   await Job.remove(req.params.id);
   return res.json({ deleted: req.params.id });
 });
+
+module.exports = router;

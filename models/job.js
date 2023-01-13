@@ -47,6 +47,8 @@ class Job {
     const values = [];
     let whereClause = "";
 
+    console.log('searchFilter',searchFilter);
+
     if (searchFilter) {
       const keys = Object.keys(searchFilter);
       const { title, minSalary, hasEquity } = searchFilter;
@@ -85,6 +87,8 @@ class Job {
   // Part 4
   static async findAll(searchFilter) {
     const { whereClause, values } = this.constructWhereClause(searchFilter);
+
+    console.log('whereClause',whereClause);
     const jobsRes = await db.query(
       `SELECT id,
             title,
