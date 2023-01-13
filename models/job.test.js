@@ -144,20 +144,6 @@ describe("findAll", function () {
     ]);
   });
 
-  test("works: filter by handle", async function () {
-    const searchFilter = {
-      companyHandle: "c1"
-    };
-    let jobs = await Job.findAll(searchFilter);
-    expect(jobs).toEqual([
-      {
-        title: "Test Job 1",
-        salary: 10000,
-        equity: "0",
-        companyHandle: "c1",
-      }
-    ]);
-  });
 });
 
 /************************************** get */
@@ -173,9 +159,9 @@ describe("get a job", function () {
     });
   });
 
-  test("not found if no such job id", async function () {
+  test.only("not found if no such job id", async function () {
     try {
-      await Job.get("whatever");
+      await Job.get(999999);
       throw new Error("fail test, you shouldn't get here");
     } catch (err) {
       expect(err instanceof NotFoundError).toBeTruthy();

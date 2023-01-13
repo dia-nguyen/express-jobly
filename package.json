@@ -24,6 +24,7 @@
     "cors": "*",
     "dotenv": "*",
     "express": "^5.0.0-alpha.8",
+    "jest": "^29.3.1",
     "jsonschema": "*",
     "jsonwebtoken": "*",
     "morgan": "*",

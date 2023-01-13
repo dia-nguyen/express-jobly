@@ -116,14 +116,14 @@ class Job {
       `SELECT id,
                 title,
                 salary,
-                company_handle AS "companyHandle",
+                company_handle AS "companyHandle"
            FROM jobs
            WHERE id = $1`,
       [id]
     );
 
     const job = jobRes.rows[0];
-
+      console.log("job: ", job)
     if (!job) throw new NotFoundError(`No job: ${id}`);
 
     return job;
