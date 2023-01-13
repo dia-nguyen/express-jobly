@@ -223,7 +223,7 @@ describe("GET /users/:username", function () {
     });
   });
 
-  test("unauth for non-admin or not specific user", async function () {
+  test("unauth for non-admin and not specific user", async function () {
     const resp = await request(app).get(`/users/u2`)
       .set("authorization", `Bearer ${u1Token}`);
 
@@ -282,7 +282,7 @@ describe("PATCH /users/:username", () => {
     });
   });
 
-  test("unauth for non-admin or non-specific user", async function () {
+  test("unauth for non-admin and non-specific user", async function () {
     const resp = await request(app)
       .patch(`/users/u2`)
       .send({
@@ -357,7 +357,7 @@ describe("DELETE /users/:username", function () {
     expect(resp.body).toEqual({ deleted: "u1" });
   });
 
-  test("unauth for non-admin or non-specific user", async function () {
+  test("unauth for non-admin and non-specific user", async function () {
     const resp = await request(app).delete(`/users/u2`)
     .set("authorization", `Bearer ${u1Token}`);
 

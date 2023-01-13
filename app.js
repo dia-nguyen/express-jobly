@@ -33,7 +33,8 @@ app.use(function (req, res, next) {
 
 /** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
-  if (process.env.NODE_ENV !== "test") console.error(err.stack); // FIXME: getting error here when running tests. are we supposed to be getting this error?. need clarificaiton
+  if (process.env.NODE_ENV !== "test") console.error("hello sarah",err.stack);
+  // FIXME: getting error here when running tests. are we supposed to be getting this error?. need clarificaiton
   const status = err.status || 500;
   const message = err.message;
 
