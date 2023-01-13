@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://our.company.com/jobNew.schema.json",
+  "$id": "http://our.company.com/jobFilter.schema.json",
   "type": "object",
   "properties": {
     "title": {
@@ -8,16 +8,12 @@
       "minLength": 1,
       "maxLength": 100
     },
-    "salary": {
+    "minSalary": {
       "type": "integer",
       "minimum": 0
     },
     "equity": {
       "type": "string"
-    },
-    "companyHandle": {
-      "type": "integer",
-      "minimum": 0
     }
   },
   "additionalProperties": false,

@@ -18,11 +18,10 @@ const router = new express.Router();
  *
  * Returns { id, title, salary, equity, companyHandle }
  *
- * Authorization required: admin only
+ * Authorization required: login and admin only
  *
  */
-
-router.post("/", ensureIsAdmin, async function () {
+router.post("/",ensureLoggedIn, ensureIsAdmin, async function () {
   const validator = jsonschema.validate(
     req.body,
     jobNewSchema,
@@ -56,4 +55,62 @@ router.get("/", async function (req, res, next) {
     query.minSalary = Number(query.minSalary)
   }
 
+  const validator = jsonschema.validate(
+    query,
+    jobFilterSchema,
+    {required: true}
+  )
+  if (!validator.valid) {
+    const errs = validator.errors.map(e => e.stack);
+    throw new BadRequestError(errs);
+  }
+
+  const jobs = await Job.findAll(req.query);
+  return res.json({ jobs });
 })
+
+/** GET /[id] => { job }
+ *  Job is { id, title, salary, equity, companyHandle }
+ *
+ * Authorization required: none
+ */
+
+router.get("/:id", async function(req, res, next){
+  const job = await Job.get(req.params.id);
+  return res.json({ job });
+})
+
+/** PATCH /[id] { salary, equity } => { job }
+ *
+ * Patches job data.
+ *
+ * fields can be: { salary, equity }
+ *
+ * Returns { id, title, salary, equity, companyHandle }
+ *
+ * Authorization required: login and is admin
+ */
+router.patch("/id", ensureLoggedIn, ensureIsAdmin, async function(req, res, next){
+  const validator = jsonschema.validate(
+    req.body,
+    jobUpdateSchema,
+    {required:true}
+  );
+  if (!validator.valid) {
+    const errs = validator.errors.map(e => e.stack);
+    throw new BadRequestError(errs);
+  }
+
+  const job = await Job.update(req.params.id, req.body);
+  return res.json({ job });
+})
+
+/** DELETE /[id]  =>  { deleted: id }
+ *
+ * Authorization: login and is admin
+ */
+
+router.delete("/:id", ensureLoggedIn, ensureIsAdmin, async function (req, res, next) {
+  await Job.remove(req.params.id);
+  return res.json({ deleted: req.params.id });
+});
