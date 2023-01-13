@@ -159,7 +159,7 @@ describe("get a job", function () {
     });
   });
 
-  test.only("not found if no such job id", async function () {
+  test("not found if no such job id", async function () {
     try {
       await Job.get(999999);
       throw new Error("fail test, you shouldn't get here");
@@ -175,8 +175,7 @@ describe("update", function() {
   const updateData = {
     title: "New Job",
     salary: 50000,
-    equity: "0.05",
-    companyHandle: "c2"
+    equity: "0.05"
   };
 
   test("works", async function(){
@@ -204,7 +203,7 @@ describe("update", function() {
 
   test("not found if no such job id", async function () {
     try {
-      await Job.update("whatever", updateData);
+      await Job.update(9999, updateData);
       throw new Error("fail test, you shouldn't get here");
     } catch (err) {
       expect(err instanceof NotFoundError).toBeTruthy();
@@ -213,7 +212,7 @@ describe("update", function() {
 
   test("bad request with no data", async function () {
     try {
-      await Job.update("1", {});
+      await Job.update(1, {});
       throw new Error("fail test, you shouldn't get here");
     } catch (err) {
       expect(err instanceof BadRequestError).toBeTruthy();
@@ -225,7 +224,7 @@ describe("update", function() {
 
 describe("remove", function () {
   test("works", async function () {
-    await Job.remove("1");
+    await Job.remove(1);
     const res = await db.query(
       "SELECT handle FROM jobs WHERE id='1'"
     );
@@ -234,7 +233,7 @@ describe("remove", function () {
 
   test("not found if no such job", async function () {
     try {
-      await Job.remove("nope");
+      await Job.remove(9999);
       throw new Error("fail test, you shouldn't get here");
     } catch (err) {
       expect(err instanceof NotFoundError).toBeTruthy();

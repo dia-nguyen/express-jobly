@@ -142,10 +142,7 @@ class Job {
    */
 
    static async update(id, data) {
-    const { setCols, values } = sqlForPartialUpdate(data, {
-      equity,
-      salary
-    });
+    const { setCols, values } = sqlForPartialUpdate(data, { });
     const idVarIdx = "$" + (values.length + 1);
 
     const querySql = `
