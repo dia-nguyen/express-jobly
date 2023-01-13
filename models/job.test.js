@@ -151,13 +151,14 @@ describe("findAll", function () {
 
 describe("get a job", function () {
   test("works", async function () {
-    console.log('jobIds',jobIds);
-    console.log('jobIds[0]',jobIds[0]);
-    let job = await Job.get(jobIds[0]);
+    const jobId = jobIds[0];
+    let job = await Job.get(jobId);
+
     expect(job).toEqual({
-      title: "Test Job 1",
-      salary: 10000,
+      title: "Test Job",
+      salary: 100000,
       equity: "0",
+      id: jobId,
       companyHandle: "c1",
     });
   });
@@ -175,6 +176,7 @@ describe("get a job", function () {
 /************************************** update */
 
 describe("update", function() {
+  const jobId = jobIds[0];
   const updateData = {
     title: "New Job",
     salary: 50000,
@@ -182,7 +184,7 @@ describe("update", function() {
   };
 
   test("works", async function(){
-    let job = await Job.update("1", updateData);
+    let job = await Job.update(jobId, updateData);
     expect(company).toEqual({
       id: "1",
       ...updateData,
@@ -195,7 +197,7 @@ describe("update", function() {
     );
     expect(result.rows).toEqual([
       {
-        id: "1",
+        id: jobId,
         title: "New Job",
         salary: 50000,
         equity: "0.05",

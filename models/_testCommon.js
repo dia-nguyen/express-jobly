@@ -42,9 +42,12 @@ async function commonBeforeAll() {
       VALUES ('Test Job', 100000, '0', 'c1'),
               ('Test Job 2', 120000, '0.02', 'c2')
       RETURNING id`
+
   );
 
-  jobIds = jobs.rows.map((row) => row.id);
+  for (let row of jobs.rows) {
+    jobIds.push(row.id)
+  }
 }
 
 async function commonBeforeEach() {

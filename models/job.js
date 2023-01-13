@@ -102,8 +102,8 @@ class Job {
 
   /** Given a job id, return data about job.
    *
-   * Returns { id, title, salary, companyHandle }
-   *   where jobs is [{ id, title, salary, equity}, ...]
+   * Returns { id, title, salary, equity, companyHandle }
+   *   where company is [ { ...} ]
    *
    * Throws NotFoundError if not found.
    **/
@@ -113,6 +113,7 @@ class Job {
       `SELECT id,
                 title,
                 salary,
+                equity,
                 company_handle AS "companyHandle"
            FROM jobs
            WHERE id = $1`,
