@@ -176,7 +176,6 @@ describe("get a job", function () {
 /************************************** update */
 
 describe("update", function() {
-  const jobId = jobIds[0];
   const updateData = {
     title: "New Job",
     salary: 50000,
@@ -184,16 +183,19 @@ describe("update", function() {
   };
 
   test("works", async function(){
+    const jobId = jobIds[0];
     let job = await Job.update(jobId, updateData);
-    expect(company).toEqual({
-      id: "1",
+    expect(job).toEqual({
+      id: jobId,
+      companyHandle : "c1",
       ...updateData,
     });
 
     const result = await db.query(
-      `SELECT id, title, salary, equity, company_handle
+      `SELECT id, title, salary, equity, company_handle AS "companyHandle"
           FROM jobs
-          WHERE id = '1'`
+          WHERE id = $1`,
+          [jobId]
     );
     expect(result.rows).toEqual([
       {
@@ -201,7 +203,7 @@ describe("update", function() {
         title: "New Job",
         salary: 50000,
         equity: "0.05",
-        companyHandle: "c2"
+        companyHandle: "c1"
       }
     ])
   })
@@ -216,8 +218,9 @@ describe("update", function() {
   });
 
   test("bad request with no data", async function () {
+    const jobId = jobIds[0];
     try {
-      await Job.update(1, {});
+      await Job.update(jobId, {});
       throw new Error("fail test, you shouldn't get here");
     } catch (err) {
       expect(err instanceof BadRequestError).toBeTruthy();
@@ -229,9 +232,10 @@ describe("update", function() {
 
 describe("remove", function () {
   test("works", async function () {
-    await Job.remove(1);
+    const jobId = jobIds[0];
+    await Job.remove(jobId);
     const res = await db.query(
-      "SELECT handle FROM jobs WHERE id='1'"
+      "SELECT id FROM jobs WHERE id=$1", [jobId]
     );
     expect(res.rows.length).toEqual(0);
   });
