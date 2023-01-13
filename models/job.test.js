@@ -21,20 +21,32 @@ describe("create a job", function () {
   const newJob = {
     title: "testJob",
     companyHandle: "c2",
-    salary: "50000",
-    equity: 0,
+    salary: 50000,
+    equity: "0",
   };
 
   test("works", async function () {
     let job = await Job.create(newJob);
-    expect(job).toEqual(newJob);
+    expect(job).toEqual({
+      id: expect.any(Number),
+      title: "testJob",
+      companyHandle: "c2",
+      salary: 50000,
+      equity: "0",
+    });
 
-    const results = await db.query(
-      `SELECT title, company_handle, salary, equity
+    const result = await db.query(
+      `SELECT id, title, company_handle AS "companyHandle", salary, equity
         FROM jobs
         WHERE title = 'testJob'`
     );
-    expect(result.rows).toEqual([newJob]);
+    expect(result.rows).toEqual([{
+      id: expect.any(Number),
+      title: "testJob",
+      companyHandle: "c2",
+      salary: 50000,
+      equity: "0",
+    }]);
   });
 });
 
@@ -45,13 +57,15 @@ describe("findAll", function () {
     expect(jobs).toEqual([
       {
         title: "Test Job",
-        salary: 10000,
+        salary: 100000,
+        id: expect.any(Number),
         equity: "0",
         companyHandle: "c1",
       },
       {
         title: "Test Job 2",
-        salary: 12000,
+        salary: 120000,
+        id: expect.any(Number),
         equity: "0.02",
         companyHandle: "c2",
       }
@@ -66,7 +80,8 @@ describe("findAll", function () {
     expect(jobs).toEqual([
       {
         title: "Test Job",
-        salary: 10000,
+        salary: 100000,
+        id: expect.any(Number),
         equity: "0",
         companyHandle: "c1",
       }
@@ -80,8 +95,16 @@ describe("findAll", function () {
     let jobs = await Job.findAll(searchFilter);
     expect(jobs).toEqual([
       {
+        title: "Test Job",
+        salary: 100000,
+        id: expect.any(Number),
+        equity: "0",
+        companyHandle: "c1",
+      },
+      {
         title: "Test Job 2",
-        salary: 12000,
+        salary: 120000,
+        id: expect.any(Number),
         equity: "0.02",
         companyHandle: "c2",
       }
@@ -96,8 +119,9 @@ describe("findAll", function () {
     expect(jobs).toEqual([
       {
         title: "Test Job 2",
-        salary: 12000,
+        salary: 120000,
         equity: "0.02",
+        id: expect.any(Number),
         companyHandle: "c2",
       }
     ]);
@@ -105,15 +129,16 @@ describe("findAll", function () {
 
   test("works: filter hasEquity", async function () {
     const searchFilter = {
-      title: "Job 1",
+      title: "Test Job",
       hasEquity: false
     };
     let jobs = await Job.findAll(searchFilter);
     expect(jobs).toEqual([
       {
-        title: "Test Job 1",
-        salary: 10000,
+        title: "Test Job",
+        salary: 100000,
         equity: "0",
+        id: expect.any(Number),
         companyHandle: "c1",
       }
     ]);

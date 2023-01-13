@@ -25,10 +25,12 @@ class Job {
           company_handle)
            VALUES
              ($1, $2, $3, $4)
-           RETURNING it, title, salary, equity, company_handle AS "companyHandle"`,
+           RETURNING id, title, salary, equity, company_handle AS "companyHandle"`,
       [title, salary, equity, companyHandle]
     );
     const job = result.rows[0];
+
+    console.log('job',job);
 
     return job;
   }
@@ -62,7 +64,6 @@ class Job {
       }
 
       if (hasEquity === true) {
-        values.push(hasEquity);
         query.push(`equity > 0`);
       }
 
@@ -72,6 +73,8 @@ class Job {
         whereClause = `WHERE ${query[0]}`;
       }
     }
+
+    console.log('whereClause',whereClause);
     return {
       whereClause,
       values,
@@ -87,10 +90,10 @@ class Job {
     const { whereClause, values } = this.constructWhereClause(searchFilter);
     const jobsRes = await db.query(
       `SELECT id,
-                title,
-                salary,
-                equity,
-                company_handle AS "companyHandle",
+            title,
+            salary,
+            equity,
+            company_handle AS "companyHandle"
           FROM jobs
           ${whereClause}
           ORDER BY id`,
@@ -175,9 +178,9 @@ class Job {
 
     if (!job) throw new NotFoundError(`No job: ${id}`);
   }
-
-
-
 }
+
+module.exports = Job;
+
 
 
