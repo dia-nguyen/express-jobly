@@ -8,6 +8,7 @@ const {
   commonBeforeEach,
   commonAfterEach,
   commonAfterAll,
+  jobIds
 } = require("./_testCommon");
 
 beforeAll(commonBeforeAll);
@@ -150,7 +151,9 @@ describe("findAll", function () {
 
 describe("get a job", function () {
   test("works", async function () {
-    let job = await Job.get("1");
+    console.log('jobIds',jobIds);
+    console.log('jobIds[0]',jobIds[0]);
+    let job = await Job.get(jobIds[0]);
     expect(job).toEqual({
       title: "Test Job 1",
       salary: 10000,

@@ -30,8 +30,6 @@ class Job {
     );
     const job = result.rows[0];
 
-    console.log('job',job);
-
     return job;
   }
 
@@ -74,7 +72,6 @@ class Job {
       }
     }
 
-    console.log('whereClause',whereClause);
     return {
       whereClause,
       values,
@@ -123,7 +120,6 @@ class Job {
     );
 
     const job = jobRes.rows[0];
-      console.log("job: ", job)
     if (!job) throw new NotFoundError(`No job: ${id}`);
 
     return job;
